@@ -1,0 +1,63 @@
+<!--pages/canvas/canvas.wxml-->
+<!-- canvas画布-->
+<canvas canvas-id="myCanvas" id='my-canvas' class='canvas' ></canvas>
+
+<view class='invite-head'>
+  <!-- 已授权 -->
+  <view class='card-com'  bindtap='saveImageToPhotos'  wx:if="{{!renewShow}}">
+    <view class='inv-card'>
+      <view class='pic'>
+        <image class='img' id='card-img'  mode='scaleToFill' src='{{cardImgSrc}}' />
+      </view>
+      <view class='info' id='card-info'>
+        <view class='u-name'>我是<label class='n'>{{userInfo.nickName}}</label></view>
+        <view class='u-des'>邀请你和我一起旅行！</view>
+        <view class='pp'>长按二维码，开启你的旅行之路</view>
+        <image class='ewm-img' id='ewm-img' src='{{imgUrl}}/ewm.png' />
+      </view>
+    </view>
+  </view>
+
+  <!-- 重新授权时 -->
+  <view class='renew-com'  bindtap='renew'  wx:if="{{renewShow}}">
+     <view class='inv-card'>
+      <view class='pic'>
+        <image class='img' id='card-img'  mode='scaleToFill' src='{{cardImgSrc}}' />
+      </view>
+      <view class='info' id='card-info'>
+        <view class='u-name'>我是<label class='n'>{{userInfo.nickName}}</label></view>
+        <view class='u-des'>邀请你和我一起旅行！</view>
+        <view class='pp'>长按二维码，开启你的旅行之路</view>
+        <image class='ewm-img' id='ewm-img' src='{{imgUrl}}/ewm.png' />
+      </view>
+    </view>
+
+  </view>
+
+  <view class='inv-tip'>点击上方图片保存并发送给好友</view>
+
+</view>
+
+  <!-- 切换卡 -->
+<view class='invite-modle'>
+  <scroll-view scroll-x="true" class="poster-mod" scroll-left="{{scrollLeft}}">
+      <block wx:for="{{cardArr}}" wx:key="key" wx:for-index="key" wx:for-item="v">
+        <view class="poster-item {{currentTab==key?'cur':''}}"  >
+          <image class='img' mode="widthFix" data-current="{{key}}"  src='{{v.img}}' data-id="{{v.id}}" data-src="{{v.img}}" 
+          bindtap="swichNav" >
+          </image>
+        </view>
+      </block>
+  </scroll-view>
+</view>
+
+
+<!-- 用于计算宽高值 -->
+<view class='query'>
+  <view class='pd'></view>
+  <view class='ewm-leftTop'></view>
+  <view class='pt1'></view>
+  <view class='pt2'></view>
+  <view class='pt3'></view>
+</view>
+

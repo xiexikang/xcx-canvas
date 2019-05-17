@@ -1,0 +1,37 @@
+/* pages/canvas/canvas.wxss */
+
+.canvas{ width:400rpx; height:690rpx; background-color: #fff; position: fixed; left: -100%; top: -100%; }
+
+.invite-head{ width: 100%; height: 965rpx; background-color: #f5f5f5; position: relative;}
+.invite-head .share-btn{ width: 114rpx; height: 60rpx; background-color: #e94579;
+ position: absolute; right: 0; bottom: 38rpx; border-radius: 40rpx 0 0  40rpx;  display: flex;justify-content: center; align-items: center;}
+.invite-head .share-btn .i{ width: 48rpx; height: 24rpx; background-repeat: no-repeat; background-size: cover; 
+display: inline-block; background-image:url('https://7830-x01-a0804c-1258524456.tcb.qcloud.la/icons/i-ffxx-ico.png')}
+
+.card-com,.renew-com{ width: 400rpx; height: 690rpx; background-color: #fff;overflow: hidden;
+position: absolute; left: 50%; transform: translateX(-50%); top: 80rpx;}
+
+.inv-card{ width: 100%; height: 100%; }
+.inv-card .pic{ width: 100%; height: 570rpx; }
+.inv-card .pic .img{ width: 100%; height: 100%; display: inline-block;}
+.inv-card .info{ width: 100%; height: 120rpx; padding: 15rpx 0 0 15rpx; box-sizing: border-box;
+ background-color: #fff; position: relative;}
+.inv-card .info .u-name{ color: #333; font-size: 24rpx;}
+.inv-card .info .u-des{ color: #333; font-size: 22rpx; margin-top: 2rpx; }
+.inv-card .info .pp{ color: #999; font-size:16rpx; margin-top: 5rpx;}
+.inv-card .info .ewm-img{ width: 80rpx; height: 80rpx; position: absolute; right: 15rpx; bottom: 20rpx;}
+.inv-tip{ width: 100%; text-align: center;color: #333; font-size: 24rpx; position: absolute; bottom: 135rpx;}
+
+.query{ position: fixed; left: 100%; bottom: -100%;}
+.pd{ width: 15rpx; height: 40rpx;}
+.ewm-leftTop{ width:306rpx; height:590rpx;}
+.pt1{ height: 610rpx;}
+.pt2{ height: 640rpx;}
+.pt3{ height: 668rpx;}
+
+.invite-modle{ width: 100%; height: 240rpx; background-color:#fff; box-shadow:0,0,0 rgba(170,170,170, .38); 
+ padding: 48rpx 0 0 28rpx; box-sizing: border-box; position: fixed; bottom: 0; left: 0;}
+.poster-mod{ width: 100%; height: 150rpx; overflow: hidden; background: #fff;  white-space: nowrap;}
+.poster-item{ height: 144rpx; background-color: #f0f0f0; border-radius: 6rpx;  border:1.5px solid transparent;   display: inline-block; overflow: hidden; margin-right: 35rpx;}
+.poster-item.cur{ border-color: #e94579;}
+.poster-item .img{ width: 144rpx; height: 144rpx;}
