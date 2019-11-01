@@ -98,7 +98,9 @@ Page({
           that.setData({
             poster: res.tempFilePath,
           })
-          that.saveCanvasImage();
+          wx.nextTick(() => {
+            that.saveCanvasImage();
+          })
         }
       })
     }, 100);
