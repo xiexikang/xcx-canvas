@@ -13,7 +13,7 @@
 
 
   [1]: https://developers.weixin.qq.com/miniprogram/dev/api/wx.createCanvasContext.html
-  [2]: https://img-blog.csdnimg.cn/2019031315592745.png
+  [2]: https://img-blog.csdnimg.cn/20200317100555173.png
   
 **一定要注意查看文档，像素比参数的使用，不然生成的图片是模糊的~
 可以用不同的手机进行测试哦~**

@@ -30,25 +30,26 @@ Page({
     scrollLeft: 0, //切换栏的滚动条位置
     cardImgSrc: '',  //存储卡片图
     //卡片数组
-    cardArr: [{
-      id: '01',
-      img: '../../images/card-tp01.jpg'
-    }, {
-      id: '02',
-      img: '../../images/card-tp02.jpg'
-    }, {
-      id: '03',
-      img: '../../images/card-tp03.jpg'
-    }, {
-      id: '04',
-      img: '../../images/card-tp04.jpg'
-    }, {
-      id: '05',
-      img: '../../images/card-tp05.jpg'
-    }, {
-      id: '06',
-      img: '../../images/card-tp06.jpg'
-    },
+    cardArr: [
+      {
+        id: '01',
+        img: '../../images/card-tp01.jpg'
+      }, {
+        id: '02',
+        img: '../../images/card-tp02.jpg'
+      }, {
+        id: '03',
+        img: '../../images/card-tp03.jpg'
+      }, {
+        id: '04',
+        img: '../../images/card-tp04.jpg'
+      }, {
+        id: '05',
+        img: '../../images/card-tp05.jpg'
+      }, {
+        id: '06',
+        img: '../../images/card-tp06.jpg'
+      },
     ],
   },
 

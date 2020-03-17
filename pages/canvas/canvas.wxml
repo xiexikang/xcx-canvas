@@ -32,7 +32,6 @@
   </scroll-view>
 </view>
 
-
 <!-- 用于计算宽高值 -->
 <view class='query'>
   <view class='pd'></view>
