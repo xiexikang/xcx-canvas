@@ -3,8 +3,7 @@
 <canvas canvas-id="myCanvas" id='my-canvas' class='canvas' ></canvas>
 
 <view class='invite-head'>
-  <!-- 已授权 -->
-  <view class='card-com'  bindtap='saveImageToPhotos'  wx:if="{{!renewShow}}">
+  <view class='card-com'  bindtap='saveImageToPhotos'>
     <view class='inv-card'>
       <view class='pic'>
         <image class='img' id='card-img'  mode='scaleToFill' src='{{cardImgSrc}}' />
@@ -17,25 +16,7 @@
       </view>
     </view>
   </view>
-
-  <!-- 重新授权时 -->
-  <view class='renew-com'  bindtap='renew'  wx:if="{{renewShow}}">
-     <view class='inv-card'>
-      <view class='pic'>
-        <image class='img' id='card-img'  mode='scaleToFill' src='{{cardImgSrc}}' />
-      </view>
-      <view class='info' id='card-info'>
-        <view class='u-name'>我是<label class='n'>{{userInfo.nickName}}</label></view>
-        <view class='u-des'>邀请你和我一起旅行！</view>
-        <view class='pp'>长按二维码，开启你的旅行之路</view>
-        <image class='ewm-img' id='ewm-img' src='{{imgUrl}}/ewm.png' />
-      </view>
-    </view>
-
-  </view>
-
-  <view class='inv-tip'>点击上方图片保存并发送给好友</view>
-
+  <view class='inv-tip'>点击上方图片保存并发送给好友</view> 
 </view>
 
   <!-- 切换卡 -->

@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}, //用户信息
+    userInfo: {
+      'nickName':'麦兜兜'
+    }, 
     imgUrl:'../../images',
     xcxEwm: '../../images/ewm.png',
     poster: '', //生成的分享图
@@ -22,8 +24,7 @@ Page({
     pt2: 320,
     pt3: 334,
     pixelRatio: 1, //像素密度
-    renewShow: false, //重新授权
-
+   
     // 卡片模块：
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //切换栏的滚动条位置
@@ -51,7 +52,6 @@ Page({
     ],
   },
 
-
   //canvas画图
   drawCanvas(e) {
     let that = this;
@@ -76,7 +76,6 @@ Page({
     /* 绘制 */
     ctx.stroke()
     ctx.draw()
-
   },
 
   //将绘制后的canvas保存为图片
@@ -84,7 +83,7 @@ Page({
     let that = this;
     that.drawCanvas();
     //加个定时器，防止图为黑屏
-    setTimeout(function () {
+    setTimeout(()=>{
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
@@ -103,8 +102,7 @@ Page({
           })
         }
       })
-    }, 100);
-
+    }, .1e3);
   },
 
   // 保存图片方法
@@ -122,8 +120,6 @@ Page({
         console.log(err)
       }
     })
-
-
   },
 
   // 点击保存图片到相册（授权）
@@ -136,18 +132,31 @@ Page({
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success() {
-              console.log('11')
               that.canvasToPath();
             },
             // 拒绝授权时，则进入手机设置页面，可进行授权设置
             fail() {
               console.log('拒绝授权');
-              wx.showToast({
-                icon: 'none',
-                title: '拒绝保存图片'
-              })
-              that.setData({
-                renewShow: true
+              wx.showModal({
+                title:'授权失败',
+                content:'请允许”保存图片到相册“后，才可以把分享图保存到手机相册哦~',
+                showCancel:false,
+                success(res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success: (ret) => {
+                        if(ret.authSetting['scope.writePhotosAlbum']){
+                          that.canvasToPath();
+                        }else{
+                          //返回-回调
+                          if (that.isCancleCallback){
+                            that.isCancleCallback(ret);
+                           }
+                        }
+                       }
+                    })
+                 }
+                }
               })
             }
           })
@@ -162,19 +171,55 @@ Page({
     })
   },
 
+  // 点击切换卡片
+  swichNav(e) {
+    var that = this,
+      cur = e.target.dataset.current,
+      src = e.target.dataset.src;
+    if (that.data.currentTaB == cur) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: cur
+      })
+    }
+    that.setData({
+      cardImgSrc: src
+    })
+    that.checkCor();
+  },
 
-  //重新授权获取相册
-  renew(e) {
+  //判断当前滚动超过一屏时
+  checkCor(e) {
+    var that = this;
+    if (that.data.currentTab > 2) {
+      that.setData({
+        scrollLeft: 300
+      })
+    } else {
+      that.setData({
+        scrollLeft: 0
+      })
+    }
+  },
+
+  //卡片默认显示第一张
+  defaultFirstShow(e) {
+    let that = this,
+      defaultCardImgSrc = that.data.cardArr[0].img;
+    that.setData({
+      cardImgSrc: defaultCardImgSrc
+    })
+  },
+
+  //获取像素比
+  getPix(){
     let that = this;
-    wx.openSetting({
-      success(settingdata) {
-        if (settingdata.authSetting['scope.writePhotosAlbum']) {
-          that.setData({
-            renewShow: false
-          })
-          that.canvasToPath();
-        } else {
-        }
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          pixelRatio: res.pixelRatio   
+        })
       }
     })
   },
@@ -234,48 +279,13 @@ Page({
     }).exec();
   },
 
-
-  // 点击切换卡片
-  swichNav(e) {
-    var that = this,
-      cur = e.target.dataset.current,
-      src = e.target.dataset.src;
-    if (that.data.currentTaB == cur) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: cur
-      })
-    }
-    that.setData({
-      cardImgSrc: src
-    })
-    that.checkCor();
-
-  },
-
-  //判断当前滚动超过一屏时
-  checkCor(e) {
-    var that = this;
-    if (that.data.currentTab > 2) {
-      that.setData({
-        scrollLeft: 300
-      })
-    } else {
-      that.setData({
-        scrollLeft: 0
-      })
-    }
-  },
-
-  //卡片默认显示第一张
-  defaultFirstShow(e) {
-    let that = this,
-      cardImgSrc = that.data.cardImgSrc,
-      defaultCardImgSrc = that.data.cardArr[0].img;
-    that.setData({
-      cardImgSrc: defaultCardImgSrc
-    })
+  //初始化
+  init(){
+    let that = this;
+    that.getPix();
+    that.defaultFirstShow();
+    that.querySelect();
+    that.drawCanvas();
   },
 
   /**
@@ -283,23 +293,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    that.defaultFirstShow();
-    that.querySelect();
-    that.drawCanvas();//canvas画图
-    //设备信息
-    wx.getSystemInfo({
-      success(res) {
-        that.setData({
-          pixelRatio: res.pixelRatio    //像素比
-        })
-      }
-    })
-    //用户信息
-    app.getUserInfo(function (userInfo) {
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+    that.init();
 
   },
 
